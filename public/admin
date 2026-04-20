@@ -1,1 +1,34 @@
+backend:
+  name: git-gateway
+  branch: main
+  site_url: https://bucolic-kangaroo-4e9694.netlify.app
 
+local_backend: false
+
+site_url: https://bucolic-kangaroo-4e9694.netlify.app
+display_url: https://bucolic-kangaroo-4e9694.netlify.app
+
+media_folder: "public/images"
+public_folder: "/images"
+
+collections:
+  - name: "products"
+    label: "🛍️ المنتجات"
+    folder: "src/data/products"
+    create: true
+    slug: "{{slug}}"
+    extension: json
+    format: json
+    fields:
+      - { label: "اسم المنتج", name: "name", widget: "string" }
+      - { label: "السعر", name: "price", widget: "number" }
+      - { label: "الوصف", name: "description", widget: "text" }
+      - label: "صورة المنتج"
+        name: "image"
+        widget: "image"
+        required: true
+      - label: "فيديو المنتج"
+        name: "video"
+        widget: "file"
+        required: false
+      - { label: "متوفر", name: "inStock", widget: "boolean", default: true }
