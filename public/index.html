@@ -1,1 +1,45 @@
-
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Tola Store - لوحة التحكم</title>
+</head>
+<body>
+  <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+  <script>
+    // 🔐 كلمة المرور (غيّرها لما تريد)
+    const ADMIN_EMAIL = "mahmoud25.07.94@gmail.com";
+    const ADMIN_PASSWORD = "Tola2026!"; // ⚠️ غيّر هذه الكلمة
+    
+    // التحقق من تسجيل الدخول
+    if (window.netlifyIdentity) {
+      window.netlifyIdentity.on("init", function(user) {
+        if (!user) {
+          window.netlifyIdentity.open("login");
+        }
+      });
+      
+      window.netlifyIdentity.on("login", function(user) {
+        if (user && user.email === ADMIN_EMAIL) {
+          document.getElementById("cms").style.display = "block";
+        } else {
+          alert("غير مسموح لك بالدخول!");
+          window.netlifyIdentity.logout();
+        }
+      });
+    }
+    
+    // إخفاء لوحة التحكم حتى تسجيل الدخول
+    document.addEventListener("DOMContentLoaded", function() {
+      const cmsDiv = document.createElement("div");
+      cmsDiv.id = "cms";
+      cmsDiv.style.display = "none";
+      
+      // إضافة iframe للوحة التحكم
+      cmsDiv.innerHTML = '<iframe src="https://bucolic-kangaroo-4e9694.netlify.app/admin/app.html" style="width:100%;height:100vh;border:none;"></iframe>';
+      document.body.appendChild(cmsDiv);
+    });
+  </script>
+</body>
+</html>
